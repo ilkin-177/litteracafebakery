@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Littera Cafe & Bakery | Bakı</title>
+  <meta name="description" content="Littera Cafe & Bakery - Bakı, Azərbaycan. Xüsusi qəhvə, təzə fransız şirniyyatları və mini-kitabxana.">
+  <meta name="theme-color" content="#2C1810">
+  <meta property="og:title" content="Littera Cafe & Bakery | Bakı">
+  <meta property="og:description" content="Qəhvə, kitab və şirin anların məkanı.">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+
+  <!-- Tailwind CSS (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/tailwind.config.js"></script>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Xüsusi stillər -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="relative min-h-screen flex flex-col justify-between overflow-x-hidden">
+
+  <!-- PRELOADER -->
+  <div id="preloader" aria-hidden="true">
+    <svg viewBox="0 0 64 64" width="84" height="84" fill="none">
+      <path class="steam" d="M22 22c-4-4 4-6 0-12"/>
+      <path class="steam s2" d="M32 22c-4-4 4-6 0-12"/>
+      <path class="steam s3" d="M42 22c-4-4 4-6 0-12"/>
+      <path d="M14 28h32v12a12 12 0 0 1-12 12h-8a12 12 0 0 1-12-12z" fill="#FAEDCD"/>
+      <path d="M46 31h4a5 5 0 0 1 0 10h-5" stroke="#FAEDCD" stroke-width="3" stroke-linecap="round"/>
+      <path d="M12 56h40" stroke="#D4A373" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+    <div class="brand">Littera Cafe</div>
+    <div class="sub">Cafe &amp; Bakery</div>
+  </div>
+
+  <div id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- TOP ANNOUNCEMENT BAR -->
+  <div class="bg-brand-dark text-brand-cream text-xs sm:text-sm py-2 px-4 text-center border-b border-brand-accent/20 max-w-full overflow-hidden">
+    <div class="container mx-auto flex justify-between items-center gap-3">
+      <span><i class="fa-solid fa-location-dot text-brand-accent mr-2"></i>Bakı şəhəri</span>
+      <span class="hidden md:inline"><i class="fa-regular fa-clock text-brand-accent mr-2"></i>Hər gün: 08:00 - 23:00</span>
+      <a href="tel:+994519111124" class="hover:text-brand-accent transition"><i class="fa-solid fa-phone mr-1"></i>+994 51 123 45 67</a>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <header id="site-header" class="sticky top-0 z-40 glass-header text-brand-paper shadow-xl border-b border-brand-accent/20">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+
+      <a href="#home" class="flex items-center space-x-3 group">
+        <div class="w-10 h-10 rounded-full bg-brand-accent/20 flex items-center justify-center border border-brand-accent/50 group-hover:scale-110 group-hover:rotate-6 transition-transform">
+          <i class="fa-solid fa-book-open text-brand-accent text-xl"></i>
+        </div>
+        <div>
+          <span class="font-serif-custom text-xl sm:text-2xl font-bold tracking-wide text-brand-cream block leading-none">Littera Cafe</span>
+          <span class="text-[10px] uppercase tracking-widest text-brand-accent font-light">Cafe &amp; Bakery • Bakı</span>
+        </div>
+      </a>
+
+      <nav class="hidden lg:flex items-center space-x-8 font-medium text-sm" aria-label="Əsas menyu">
+        <a href="#about" data-nav="about" class="nav-link">Haqqımızda</a>
+        <a href="#menu" data-nav="menu" class="nav-link">Menyu</a>
+        <a href="#library" data-nav="library" class="nav-link">Kitabxana</a>
+        <a href="#specials" data-nav="specials" class="nav-link">Xüsusi Təkliflər</a>
+        <a href="#gallery" data-nav="gallery" class="nav-link">Qalereya &amp; Rəylər</a>
+      </nav>
+
+      <div class="flex items-center space-x-4">
+        <button id="cart-btn" type="button" data-action="toggle-cart" aria-label="Səbəti aç" class="relative p-2.5 rounded-full bg-brand-primary/60 hover:bg-brand-accent/30 text-brand-cream transition border border-brand-accent/30">
+          <i class="fa-solid fa-shopping-bag text-lg"></i>
+          <span id="cart-count" class="absolute -top-1 -right-1 bg-brand-gold text-brand-dark text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center shadow">0</span>
+        </button>
+
+        <button type="button" data-action="open-reservation" class="pulse-soft hidden sm:inline-flex items-center space-x-2 bg-gradient-to-r from-brand-accent to-brand-gold text-brand-dark font-semibold px-5 py-2.5 rounded-full hover:shadow-lg hover:shadow-brand-gold/20 hover:scale-105 transition duration-200 text-sm">
+          <i class="fa-solid fa-utensils text-xs"></i>
+          <span>Masa Sifarişi</span>
+        </button>
+
+        <button id="mobile-menu-btn" type="button" data-action="toggle-mobile-menu" aria-label="Menyunu aç" aria-expanded="false" class="lg:hidden p-2 text-brand-cream hover:text-brand-accent focus:outline-none">
+          <i class="fa-solid fa-bars text-2xl"></i>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="hidden lg:hidden bg-brand-dark/95 border-b border-brand-accent/30 px-6 py-6 space-y-4">
+      <a href="#about" data-action="toggle-mobile-menu" class="block text-brand-paper hover:text-brand-accent font-medium py-1">Haqqımızda</a>
+      <a href="#menu" data-action="toggle-mobile-menu" class="block text-brand-paper hover:text-brand-accent font-medium py-1">Menyu</a>
+      <a href="#library" data-action="toggle-mobile-menu" class="block text-brand-paper hover:text-brand-accent font-medium py-1">Kitabxana</a>
+      <a href="#specials" data-action="toggle-mobile-menu" class="block text-brand-paper hover:text-brand-accent font-medium py-1">Xüsusi Təkliflər</a>
+      <a href="#gallery" data-action="toggle-mobile-menu" class="block text-brand-paper hover:text-brand-accent font-medium py-1">Qalereya &amp; Rəylər</a>
+      <div class="pt-4 border-t border-brand-accent/20">
+        <button type="button" data-action="open-reservation" class="w-full bg-brand-accent text-brand-dark font-semibold py-3 rounded-xl flex items-center justify-center space-x-2">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span>Masa Sifarişi Et</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="home" class="relative bg-brand-dark text-brand-paper min-h-[85vh] flex items-center overflow-hidden py-16">
+      <div class="hero-slides" aria-hidden="true">
+        <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=1600&auto=format&fit=crop')"></div>
+        <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=1600&auto=format&fit=crop')"></div>
+        <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1600&auto=format&fit=crop')"></div>
+      </div>
+      <div class="absolute inset-0 bg-gradient-to-r from-brand-dark via-brand-dark/90 to-transparent z-0"></div>
+      <div id="hero-particles" class="absolute inset-0 z-[1] pointer-events-none overflow-hidden" aria-hidden="true"></div>
+
+      <div class="container mx-auto px-4 z-10 relative">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div class="lg:col-span-7 space-y-6">
+            <div class="hero-in inline-flex items-center space-x-2 bg-brand-accent/15 border border-brand-accent/30 px-4 py-1.5 rounded-full text-brand-accent text-xs sm:text-sm font-medium">
+              <i class="fa-solid fa-star text-brand-gold"></i>
+              <span>Bakının Ən Nəfis Ədəbi Kafesi</span>
+            </div>
+            <h1 class="hero-in d1 font-serif-custom text-4xl sm:text-5xl lg:text-6xl font-bold text-brand-cream leading-tight">
+              Qəhvə, Kitab və <br><span id="rotating-word" class="rotating-word text-brand-accent italic" data-words="Şirin Anların|İsti Söhbətlərin|Gözəl Kitabların">Şirin Anların</span> Məkanı
+            </h1>
+            <p class="hero-in d2 text-brand-cream/80 text-base sm:text-lg max-w-xl font-light leading-relaxed">
+              Bakıda tarixin və müasir rahatlığın qovuşduğu unikal mühit. Yeni bişmiş fransız kruassanları, peşəkar baristalardan xüsusi qəhvələr və zəngin mini-kitabxanada mütaliə keyfi.
+            </p>
+
+            <div class="hero-in d3 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
+              <a href="#menu" class="bg-brand-accent hover:bg-brand-gold text-brand-dark font-bold px-8 py-4 rounded-xl text-center shadow-lg transition duration-200 hover:-translate-y-1 flex items-center justify-center space-x-2">
+                <span>Menyuya Bax</span>
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </a>
+              <button type="button" data-action="open-reservation" class="border-2 border-brand-cream/40 hover:border-brand-accent text-brand-cream hover:text-brand-accent font-semibold px-8 py-4 rounded-xl transition duration-200 hover:-translate-y-1 flex items-center justify-center space-x-2">
+                <i class="fa-regular fa-calendar-check"></i>
+                <span>Masa Sifariş Et</span>
+              </button>
+            </div>
+
+            <div class="hero-in d4 grid grid-cols-3 gap-4 pt-8 border-t border-brand-cream/10 max-w-lg">
+              <div>
+                <span class="block text-2xl sm:text-3xl font-serif-custom text-brand-gold font-bold"><span data-count="500" data-suffix="+">500+</span></span>
+                <span class="text-xs text-brand-cream/70">Zəngin Kitab</span>
+              </div>
+              <div>
+                <span class="block text-2xl sm:text-3xl font-serif-custom text-brand-gold font-bold"><span data-count="30" data-suffix="+">30+</span></span>
+                <span class="text-xs text-brand-cream/70">Qəhvə Çeşidi</span>
+              </div>
+              <div>
+                <span class="block text-2xl sm:text-3xl font-serif-custom text-brand-gold font-bold"><span data-count="100" data-suffix="%">100%</span></span>
+                <span class="text-xs text-brand-cream/70">Təbii Konditer</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero vizual -->
+          <div class="lg:col-span-5 relative hidden lg:block">
+            <div class="relative mx-auto w-full max-w-md">
+              <div class="ring-dashed spin-slow absolute -inset-8" aria-hidden="true"></div>
+              <div class="float-slow">
+                <div class="tilt rounded-2xl overflow-hidden border-4 border-brand-accent/30 shadow-2xl shine" data-tilt="7">
+                  <img src="https://images.unsplash.com/photo-1517256064527-09c73fc73e38?q=80&w=800&auto=format&fit=crop" alt="Littera Cafe interyeri" data-fallback="gallery" class="w-full h-96 object-cover">
+                </div>
+              </div>
+
+              <!-- Buxarlanan fincan -->
+              <div class="float-soft absolute -top-10 -right-6 bg-brand-dark/90 border border-brand-accent/40 rounded-2xl p-3 shadow-xl" aria-hidden="true">
+                <svg viewBox="0 0 64 64" width="64" height="64" fill="none">
+                  <path class="steam" d="M22 22c-4-4 4-6 0-12"/>
+                  <path class="steam s2" d="M32 22c-4-4 4-6 0-12"/>
+                  <path class="steam s3" d="M42 22c-4-4 4-6 0-12"/>
+                  <path d="M14 28h32v12a12 12 0 0 1-12 12h-8a12 12 0 0 1-12-12z" fill="#FAEDCD"/>
+                  <path d="M46 31h4a5 5 0 0 1 0 10h-5" stroke="#FAEDCD" stroke-width="3" stroke-linecap="round"/>
+                  <path d="M12 56h40" stroke="#D4A373" stroke-width="3" stroke-linecap="round"/>
+                </svg>
+              </div>
+
+              <div class="float-soft delay absolute -bottom-6 -left-6 bg-brand-dark/95 border border-brand-accent/40 backdrop-blur-md p-4 rounded-xl shadow-xl flex items-center space-x-3 text-brand-cream max-w-xs">
+                <div class="w-12 h-12 rounded-lg bg-brand-accent/20 flex items-center justify-center text-brand-accent text-xl flex-shrink-0">
+                  <i class="fa-solid fa-mug-hot"></i>
+                </div>
+                <div>
+                  <p class="text-xs text-brand-accent font-semibold uppercase">Xüsusi resept</p>
+                  <p class="text-sm font-bold">Littera Raff Coffee</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-dots mt-10" role="tablist" aria-label="Slayd göstəriciləri">
+          <button class="hero-dot" type="button" aria-label="Slayd 1"></button>
+          <button class="hero-dot" type="button" aria-label="Slayd 2"></button>
+          <button class="hero-dot" type="button" aria-label="Slayd 3"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="py-20 bg-parchment relative">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div class="relative reveal reveal-left">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="float-soft">
+                <div class="tilt img-zoom rounded-2xl shadow-lg translate-y-4" data-tilt="6">
+                  <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=600&auto=format&fit=crop" alt="Kafe atmosferi" data-fallback="gallery" class="w-full h-64 object-cover">
+                </div>
+              </div>
+              <div class="float-soft delay">
+                <div class="tilt img-zoom rounded-2xl shadow-lg" data-tilt="6">
+                  <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=600&auto=format&fit=crop" alt="Təzə çörək və şirniyyat" data-fallback="sweets" class="w-full h-64 object-cover">
+                </div>
+              </div>
+            </div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden sm:block">
+              <div class="relative bg-brand-primary text-brand-cream p-5 rounded-full shadow-2xl border-4 border-brand-cream text-center pulse-soft">
+                <i class="fa-solid fa-award text-2xl text-brand-gold mb-1"></i>
+                <span class="block text-[10px] tracking-widest font-bold uppercase">Bakının Sevimlisi</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-6 reveal reveal-right">
+            <div class="inline-block border-b-2 border-brand-accent pb-1">
+              <span class="text-brand-primary font-bold tracking-widest text-xs uppercase">Ruhunuzu Dincəldən Məkan</span>
+            </div>
+            <h2 class="font-serif-custom text-3xl sm:text-4xl font-bold text-brand-dark">
+              Sizi Həm Dad, Həm də Biliyə Səyahətə Dəvət Edirik
+            </h2>
+            <p class="text-gray-700 leading-relaxed font-light">
+              <strong>"Littera Cafe &amp; Bakery"</strong> yalnız qəhvə içə biləcəyiniz bir yer deyil. Bu, Nizami yurdunun mərkəzində yaradılmış həqiqi bir ədəbiyyat vahəsidir. Burada hər bir fincan premium qəhvə xüsusi seçilmiş dənələrdən hazırlanır, sobamızdan isə hər səhər təzə fransız şirniyyatlarının ətri gəlir.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+              <div class="reveal flex items-start space-x-3 p-3 rounded-lg bg-white/60 border border-brand-accent/20 hover:-translate-y-1 hover:shadow-md transition" style="--i:1">
+                <i class="fa-solid fa-mug-saucer text-brand-accent text-xl mt-1"></i>
+                <div>
+                  <h4 class="font-bold text-brand-dark text-sm">Xüsusi Qəhvə Dənələri</h4>
+                  <p class="text-xs text-gray-600">100% Ərəbika və peşəkar dəmləmə metodları.</p>
+                </div>
+              </div>
+              <div class="reveal flex items-start space-x-3 p-3 rounded-lg bg-white/60 border border-brand-accent/20 hover:-translate-y-1 hover:shadow-md transition" style="--i:2">
+                <i class="fa-solid fa-bread-slice text-brand-accent text-xl mt-1"></i>
+                <div>
+                  <h4 class="font-bold text-brand-dark text-sm">Gündəlik Təzə Şirniyyat</h4>
+                  <p class="text-xs text-gray-600">Təbii kərə yağı ilə bişirilən fərqli təamlar.</p>
+                </div>
+              </div>
+              <div class="reveal flex items-start space-x-3 p-3 rounded-lg bg-white/60 border border-brand-accent/20 hover:-translate-y-1 hover:shadow-md transition" style="--i:3">
+                <i class="fa-solid fa-book-bookmark text-brand-accent text-xl mt-1"></i>
+                <div>
+                  <h4 class="font-bold text-brand-dark text-sm">Zəngin Mini-Kitabxana</h4>
+                  <p class="text-xs text-gray-600">Klassik və müasir ədəbiyyat nüsxələri.</p>
+                </div>
+              </div>
+              <div class="reveal flex items-start space-x-3 p-3 rounded-lg bg-white/60 border border-brand-accent/20 hover:-translate-y-1 hover:shadow-md transition" style="--i:4">
+                <i class="fa-solid fa-wifi text-brand-accent text-xl mt-1"></i>
+                <div>
+                  <h4 class="font-bold text-brand-dark text-sm">Sakit İş Zonaları</h4>
+                  <p class="text-xs text-gray-600">Sürətli Wi-Fi və rahat iş masaları.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MENU -->
+    <section id="menu" class="py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center max-w-2xl mx-auto mb-12 reveal">
+          <span class="text-brand-gold font-bold uppercase tracking-widest text-xs">Nəfis Təamlar</span>
+          <h2 class="font-serif-custom text-3xl sm:text-4xl font-bold text-brand-dark mt-2">Nəfis Menyumuz</h2>
+          <p class="text-gray-600 text-sm mt-2">Damaq dadınıza uyğun ən seçmə qəhvələr, şirniyyatlar və səhər yeməkləri.</p>
+
+          <div class="mt-6 relative max-w-md mx-auto">
+            <label for="menu-search" class="sr-only">Menyuda axtar</label>
+            <input type="search" id="menu-search" autocomplete="off" placeholder="Menyuda axtar... (məs: Kruassan, Latte)" class="w-full pl-10 pr-4 py-3 rounded-full border border-gray-200 focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20 text-sm shadow-sm transition">
+            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-gray-400 text-sm"></i>
+          </div>
+        </div>
+
+        <div id="category-tabs" class="flex flex-wrap justify-center gap-2 sm:gap-4 mb-10 reveal" role="tablist" aria-label="Menyu kateqoriyaları">
+          <button type="button" data-category="all" class="cat-btn is-active">Bütün Menyu</button>
+          <button type="button" data-category="coffee" class="cat-btn">Qəhvə &amp; İçeceklər</button>
+          <button type="button" data-category="sweets" class="cat-btn">Şirniyyatlar &amp; Tortlar</button>
+          <button type="button" data-category="breakfast" class="cat-btn">Səhər Yeməyi</button>
+          <button type="button" data-category="snacks" class="cat-btn">Sendviç &amp; Suplar</button>
+        </div>
+
+        <div id="menu-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- LIBRARY -->
+    <section id="library" class="py-20 bg-brand-dark text-brand-paper relative overflow-hidden">
+      <div class="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-brand-accent/10 blur-3xl float-slow" aria-hidden="true"></div>
+      <div class="absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-brand-gold/10 blur-3xl float-slow" style="animation-delay:-3s" aria-hidden="true"></div>
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="text-center max-w-2xl mx-auto mb-12 reveal">
+          <div class="inline-flex items-center space-x-2 text-brand-accent text-xs uppercase tracking-widest font-bold mb-2">
+            <i class="fa-solid fa-book"></i>
+            <span>Kafemizin Sərvəti</span>
+          </div>
+          <h2 class="font-serif-custom text-3xl sm:text-4xl font-bold text-brand-cream">Littera Guşəsi</h2>
+          <p class="text-brand-cream/70 text-sm mt-2">Kafemizdə oxuya biləcəyiniz populyar ədəbiyyat nümunələri. Masanızda qəhvənizi qurtumlayarkən zövq alın.</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="books-container"></div>
+      </div>
+    </section>
+
+    <!-- SPECIAL -->
+    <section id="specials" class="py-16 special-bg text-brand-dark relative overflow-hidden">
+      <i class="fa-solid fa-mug-hot absolute -left-6 top-4 text-8xl text-white/10 float-soft" aria-hidden="true"></i>
+      <i class="fa-solid fa-book-open absolute right-6 bottom-2 text-8xl text-white/10 float-soft delay" aria-hidden="true"></i>
+      <div class="container mx-auto px-4 relative">
+        <div class="reveal reveal-zoom flex flex-col lg:flex-row items-center justify-between gap-8 bg-brand-dark/10 p-8 rounded-3xl border border-white/20">
+          <div class="space-y-3 max-w-2xl text-center lg:text-left">
+            <span class="bg-brand-dark text-brand-cream text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Həftəsonu Təklifi</span>
+            <h3 class="font-serif-custom text-3xl font-bold">"Səhər Mütaliəsi" Seti</h3>
+            <p class="text-brand-dark/90 text-sm leading-relaxed">
+              Hər şənbə və bazar saat 11:00-dək: İstənilən Böyük Ölçülü Kapuçino və Təzə Fransız Şokoladlı Kruassanı alana yanında günün kitabı <strong>1 saatlıq pulsuz</strong> mütaliə üçün verilir!
+            </p>
+          </div>
+          <button type="button" data-action="open-reservation" class="bg-brand-dark text-brand-cream hover:bg-brand-primary font-bold px-8 py-4 rounded-xl transition duration-200 hover:-translate-y-1 whitespace-nowrap shadow-xl">
+            Masa Rezerv Et &amp; Qatıl
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY & REVIEWS -->
+    <section id="gallery" class="py-20 bg-parchment">
+      <div class="container mx-auto px-4">
+        <div class="text-center max-w-2xl mx-auto mb-12 reveal">
+          <span class="text-brand-gold font-bold uppercase tracking-widest text-xs">Mühit &amp; Şəkillər</span>
+          <h2 class="font-serif-custom text-3xl sm:text-4xl font-bold text-brand-dark mt-1">Aura və Qonaq Rəyləri</h2>
+          <p class="text-gray-600 text-sm mt-2">Şəkilə klikləyin - böyük görünüşdə baxın.</p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16" id="gallery-grid">
+          <div class="reveal reveal-zoom gallery-item h-48 sm:h-64" style="--i:0" data-lightbox data-caption="Səhər qəhvəsi" data-full="https://images.unsplash.com/photo-1442512595331-e89e73853f31?q=80&w=1400&auto=format&fit=crop">
+            <img class="img-fade" src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?q=80&w=500&auto=format&fit=crop" alt="Qalereya şəkli 1" data-fallback="gallery" loading="lazy">
+            <span class="cap">Səhər qəhvəsi</span>
+          </div>
+          <div class="reveal reveal-zoom gallery-item h-48 sm:h-64" style="--i:1" data-lightbox data-caption="Rahat künc" data-full="https://images.unsplash.com/photo-1521017432531-fbd92d768814?q=80&w=1400&auto=format&fit=crop">
+            <img class="img-fade" src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?q=80&w=500&auto=format&fit=crop" alt="Qalereya şəkli 2" data-fallback="gallery" loading="lazy">
+            <span class="cap">Rahat künc</span>
+          </div>
+          <div class="reveal reveal-zoom gallery-item h-48 sm:h-64" style="--i:2" data-lightbox data-caption="Latte sənəti" data-full="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1400&auto=format&fit=crop">
+            <img class="img-fade" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=500&auto=format&fit=crop" alt="Qalereya şəkli 3" data-fallback="gallery" loading="lazy">
+            <span class="cap">Latte sənəti</span>
+          </div>
+          <div class="reveal reveal-zoom gallery-item h-48 sm:h-64" style="--i:3" data-lightbox data-caption="Dəmləmə anı" data-full="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?q=80&w=1400&auto=format&fit=crop">
+            <img class="img-fade" src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?q=80&w=500&auto=format&fit=crop" alt="Qalereya şəkli 4" data-fallback="gallery" loading="lazy">
+            <span class="cap">Dəmləmə anı</span>
+          </div>
+          <div class="reveal reveal-zoom gallery-item h-48 sm:h-64" style="--i:4" data-lightbox data-caption="Kafe interyeri" data-full="https://images.unsplash.com/photo-1517256064527-09c73fc73e38?q=80&w=1400&auto=format&fit=crop">
+            <img class="img-fade" src="https://images.unsplash.com/photo-1517256064527-09c73fc73e38?q=80&w=500&auto=format&fit=crop" alt="Qalereya şəkli 5" data-fallback="gallery" loading="lazy">
+            <span class="cap">Kafe interyeri</span>
+          </div>
+          <div class="reveal reveal-zoom gallery-item h-48 sm:h-64" style="--i:5" data-lightbox data-caption="Təzə şirniyyat" data-full="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=1400&auto=format&fit=crop">
+            <img class="img-fade" src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=500&auto=format&fit=crop" alt="Qalereya şəkli 6" data-fallback="sweets" loading="lazy">
+            <span class="cap">Təzə şirniyyat</span>
+          </div>
+          <div class="reveal reveal-zoom gallery-item h-48 sm:h-64" style="--i:6" data-lightbox data-caption="Qonaq masaları" data-full="https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=1400&auto=format&fit=crop">
+            <img class="img-fade" src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=500&auto=format&fit=crop" alt="Qalereya şəkli 7" data-fallback="gallery" loading="lazy">
+            <span class="cap">Qonaq masaları</span>
+          </div>
+          <div class="reveal reveal-zoom gallery-item h-48 sm:h-64" style="--i:7" data-lightbox data-caption="Axşam işığı" data-full="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=1400&auto=format&fit=crop">
+            <img class="img-fade" src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=500&auto=format&fit=crop" alt="Qalereya şəkli 8" data-fallback="gallery" loading="lazy">
+            <span class="cap">Axşam işığı</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <article class="reveal bg-white p-6 rounded-2xl shadow-sm border border-brand-accent/20 space-y-4 hover:-translate-y-2 hover:shadow-xl transition duration-300" style="--i:0">
+            <div class="flex text-brand-gold text-xs space-x-1" aria-label="5 ulduz">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="text-gray-700 text-sm italic">"Bakıda ən sevdiyim sakit məkan! Qəhvənin dadı doğrudan da əladır, xüsusən raf qəhvələrini tövsiyə edirəm. Kitab oxumaq üçün mühit ideal yaradılıb."</p>
+            <div class="flex items-center space-x-3 pt-2">
+              <div class="w-10 h-10 rounded-full bg-brand-accent/30 flex items-center justify-center font-bold text-brand-dark">AƏ</div>
+              <div>
+                <h5 class="text-sm font-bold text-brand-dark">Aysel Əliyeva</h5>
+                <span class="text-xs text-gray-500">Daimi Qonaq</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="reveal bg-white p-6 rounded-2xl shadow-sm border border-brand-accent/20 space-y-4 hover:-translate-y-2 hover:shadow-xl transition duration-300" style="--i:1">
+            <div class="flex text-brand-gold text-xs space-x-1" aria-label="5 ulduz">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="text-gray-700 text-sm italic">"Səhər bişən təzə kruassanların ətri insanı valeh edir. Cavad Xan küçəsində gəzintidən sonra dincəlmək üçün ən estetik yerdir."</p>
+            <div class="flex items-center space-x-3 pt-2">
+              <div class="w-10 h-10 rounded-full bg-brand-accent/30 flex items-center justify-center font-bold text-brand-dark">RM</div>
+              <div>
+                <h5 class="text-sm font-bold text-brand-dark">Rəşad Məmmədov</h5>
+                <span class="text-xs text-gray-500">Local Guide</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="reveal bg-white p-6 rounded-2xl shadow-sm border border-brand-accent/20 space-y-4 hover:-translate-y-2 hover:shadow-xl transition duration-300" style="--i:2">
+            <div class="flex text-brand-gold text-xs space-x-1" aria-label="5 ulduz">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="text-gray-700 text-sm italic">"Personal çox gülərüzdür. Kitabxana guşəsində Nizami Gəncəvinin nəfis nəşrlərini tapmaq məni çox şad etdi. Çox sağ olun!"</p>
+            <div class="flex items-center space-x-3 pt-2">
+              <div class="w-10 h-10 rounded-full bg-brand-accent/30 flex items-center justify-center font-bold text-brand-dark">LH</div>
+              <div>
+                <h5 class="text-sm font-bold text-brand-dark">Leyla Həsənova</h5>
+                <span class="text-xs text-gray-500">Tələbə</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-brand-dark text-brand-cream pt-16 pb-8 border-t border-brand-accent/20">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-brand-cream/10">
+        <div class="space-y-4">
+          <div class="flex items-center space-x-3">
+            <i class="fa-solid fa-book-open text-brand-accent text-2xl"></i>
+            <span class="font-serif-custom text-2xl font-bold text-brand-cream">Littera</span>
+          </div>
+          <p class="text-xs text-brand-cream/70 leading-relaxed">
+            Bakı şəhərində kitab sevgisini və yüksək keyfiyyətli konditer incəsənətini birləşdirən unikal məkan.
+          </p>
+          <div class="flex space-x-3 pt-2">
+            <a href="#" aria-label="Instagram" class="w-9 h-9 rounded-full bg-brand-cream/10 hover:bg-brand-accent hover:text-brand-dark hover:-translate-y-1 flex items-center justify-center transition"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="Facebook" class="w-9 h-9 rounded-full bg-brand-cream/10 hover:bg-brand-accent hover:text-brand-dark hover:-translate-y-1 flex items-center justify-center transition"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" aria-label="WhatsApp" class="w-9 h-9 rounded-full bg-brand-cream/10 hover:bg-brand-accent hover:text-brand-dark hover:-translate-y-1 flex items-center justify-center transition"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="font-serif-custom text-lg font-bold text-brand-gold mb-4">Tez Keçidlər</h4>
+          <ul class="space-y-2.5 text-xs text-brand-cream/80">
+            <li><a href="#about" class="hover:text-brand-accent transition">Haqqımızda</a></li>
+            <li><a href="#menu" class="hover:text-brand-accent transition">Menyu və Qiymətlər</a></li>
+            <li><a href="#library" class="hover:text-brand-accent transition">Littera Guşəsi</a></li>
+            <li><a href="#specials" class="hover:text-brand-accent transition">Xüsusi Təkliflər</a></li>
+            <li><button type="button" data-action="open-reservation" class="hover:text-brand-accent transition">Masa Sifarişi</button></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-serif-custom text-lg font-bold text-brand-gold mb-4">İş Saatları</h4>
+          <ul class="space-y-2 text-xs text-brand-cream/80">
+            <li class="flex justify-between"><span>Bazar ertəsi - Cümə:</span> <span>08:00 - 23:00</span></li>
+            <li class="flex justify-between"><span>Şənbə - Bazar:</span> <span>09:00 - 23:30</span></li>
+            <li class="pt-2 text-brand-accent"><i class="fa-solid fa-mug-hot mr-1"></i> Təzə bişmiş şirniyyatlar hər səhər 08:30-da hazır olur.</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-serif-custom text-lg font-bold text-brand-gold mb-4">Əlaqə &amp; Ünvan</h4>
+          <ul class="space-y-3 text-xs text-brand-cream/80">
+            <li class="flex items-start space-x-2">
+              <i class="fa-solid fa-location-dot text-brand-accent mt-0.5"></i>
+              <span>Bakı şəhəri, Azərbaycan</span>
+            </li>
+            <li class="flex items-center space-x-2">
+              <i class="fa-solid fa-phone text-brand-accent"></i>
+              <a href="tel:+994519111124" class="hover:text-brand-accent transition">+994 51 123 45 67</a>
+            </li>
+            <li class="flex items-center space-x-2">
+              <i class="fa-solid fa-envelope text-brand-accent"></i>
+              <a href="mailto:info@litteracafe.az" class="hover:text-brand-accent transition">info@litteracafe.az</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-8 text-center text-xs text-brand-cream/50 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <p>&copy; 2026 Littera Cafe &amp; Bakery - Bakı. Bütün hüquqlar qorunur.</p>
+        <p class="text-[11px]">Sevgi ilə Bakıda hazırlanmışdır ❤️</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- RESERVATION MODAL -->
+  <div id="reservation-modal" class="overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="res-title">
+    <div class="dialog bg-white rounded-3xl max-w-lg w-full max-h-[94vh] overflow-y-auto shadow-2xl border border-brand-accent/30">
+      <div class="bg-brand-dark text-brand-cream p-6 flex justify-between items-center border-b border-brand-accent/30 sticky top-0 z-10">
+        <div class="flex items-center space-x-3">
+          <i class="fa-solid fa-utensils text-brand-accent text-xl"></i>
+          <h3 id="res-title" class="font-serif-custom text-xl font-bold">Masa Sifarişi</h3>
+        </div>
+        <button type="button" data-action="close-reservation" aria-label="Bağla" class="text-brand-cream/70 hover:text-white text-2xl leading-none">&times;</button>
+      </div>
+
+      <form id="reservation-form" class="p-6 space-y-4" novalidate>
+        <div>
+          <label class="label" for="res-name">Adınız və Soyadınız</label>
+          <input id="res-name" name="name" type="text" required minlength="2" maxlength="80" autocomplete="name" data-autofocus placeholder="məs: Əli Əliyev" class="field">
+          <p class="field-error" data-error-for="name"></p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="label" for="res-phone">Telefon Nömrəsi</label>
+            <input id="res-phone" name="phone" type="tel" required autocomplete="tel" placeholder="+994 50 000 00 00" class="field">
+            <p class="field-error" data-error-for="phone"></p>
+          </div>
+          <div>
+            <label class="label" for="res-guests">Qonaq Sayı</label>
+            <select id="res-guests" name="guests" class="field">
+              <option value="1">1 nəfər</option>
+              <option value="2" selected>2 nəfər</option>
+              <option value="3-4">3-4 nəfər</option>
+              <option value="5+">5+ nəfər (Qrup)</option>
+            </select>
+            <p class="field-error" data-error-for="guests"></p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="label" for="res-date">Tarix</label>
+            <input id="res-date" name="date" type="date" required class="field">
+            <p class="field-error" data-error-for="date"></p>
+          </div>
+          <div>
+            <label class="label" for="res-time">Saat (08:00 - 23:00)</label>
+            <input id="res-time" name="time" type="time" required min="08:00" max="23:00" class="field">
+            <p class="field-error" data-error-for="time"></p>
+          </div>
+        </div>
+
+        <div>
+          <label class="label" for="res-notes">Xüsusi İstək / Masanın Guşəsi</label>
+          <textarea id="res-notes" name="notes" rows="2" maxlength="300" placeholder="Pəncərə kənarı, Kitab rəfinə yaxın və s." class="field"></textarea>
+        </div>
+
+        <div class="pt-2">
+          <button type="submit" class="w-full bg-brand-accent hover:bg-brand-gold text-brand-dark font-bold py-3.5 rounded-xl transition duration-200 shadow-md flex items-center justify-center gap-2">
+            <span class="btn-label">Sifarişi Təsdiqlə</span>
+          </button>
+        </div>
+      </form>
+
+      <div id="reservation-success" class="hidden p-10 text-center space-y-4">
+        <svg class="check-circle mx-auto" width="84" height="84" viewBox="0 0 84 84" fill="none" aria-hidden="true">
+          <circle cx="42" cy="42" r="38" fill="#606C38" opacity=".15"/>
+          <circle cx="42" cy="42" r="38" stroke="#606C38" stroke-width="3"/>
+          <path class="check-svg" d="M26 43l11 11 21-24" stroke="#606C38" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h4 class="font-serif-custom text-2xl font-bold text-brand-dark">Sifarişiniz qəbul olundu!</h4>
+        <p class="text-sm text-gray-600">Rezerv kodunuz: <strong id="reservation-code" class="text-brand-gold text-base"></strong><br>Sizi gözləyirik!</p>
+        <button type="button" data-action="close-reservation" class="bg-brand-dark text-brand-cream font-semibold px-8 py-3 rounded-xl hover:bg-brand-primary transition">Bağla</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CART DRAWER -->
+  <div id="cart-modal" class="overlay drawer" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+    <div class="dialog bg-white w-full max-w-md h-full shadow-2xl flex flex-col">
+      <div class="p-5 bg-brand-dark text-brand-cream flex justify-between items-center border-b border-brand-accent/30">
+        <div class="flex items-center space-x-3">
+          <i class="fa-solid fa-shopping-bag text-brand-accent text-xl"></i>
+          <h3 id="cart-title" class="font-serif-custom text-lg font-bold">Səbətiniz</h3>
+        </div>
+        <button type="button" data-action="close-cart" aria-label="Bağla" class="text-brand-cream/70 hover:text-white text-2xl leading-none">&times;</button>
+      </div>
+
+      <div id="cart-items" class="p-5 overflow-y-auto flex-1 space-y-3"></div>
+
+      <form id="cart-form" class="p-5 bg-gray-50 border-t border-gray-200 space-y-3" novalidate>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="label" for="cart-name">Ad</label>
+            <input id="cart-name" name="name" type="text" required maxlength="80" autocomplete="name" placeholder="Adınız" class="field">
+            <p class="field-error" data-error-for="name"></p>
+          </div>
+          <div>
+            <label class="label" for="cart-phone">Telefon</label>
+            <input id="cart-phone" name="phone" type="tel" required autocomplete="tel" placeholder="+994 50 ..." class="field">
+            <p class="field-error" data-error-for="phone"></p>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="label" for="cart-type">Növ</label>
+            <select id="cart-type" name="type" class="field">
+              <option value="dine-in">Kafedə yeyəcəm</option>
+              <option value="takeaway">Özümlə aparacam</option>
+            </select>
+          </div>
+          <div>
+            <label class="label" for="cart-note">Qeyd</label>
+            <input id="cart-note" name="note" type="text" maxlength="300" placeholder="İstəyə bağlı" class="field">
+          </div>
+        </div>
+        <div class="flex justify-between items-center text-base font-bold text-brand-dark pt-1">
+          <span>Yekun Məbləğ:</span>
+          <span id="cart-total" class="text-brand-gold text-xl">0.00 AZN</span>
+        </div>
+        <button type="submit" id="checkout-btn" class="w-full bg-brand-accent hover:bg-brand-gold text-brand-dark font-bold py-3.5 rounded-xl shadow-md transition duration-200 flex items-center justify-center gap-2">
+          <span class="btn-label">Sifarişi Tamamla</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" class="overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Şəkil görüntüləyici">
+    <button type="button" class="lb-btn" data-lb-close aria-label="Bağla" style="top:18px;right:18px"><i class="fa-solid fa-xmark"></i></button>
+    <button type="button" class="lb-btn" data-lb-prev aria-label="Əvvəlki" style="left:14px;top:calc(50% - 23px)"><i class="fa-solid fa-chevron-left"></i></button>
+    <button type="button" class="lb-btn" data-lb-next aria-label="Növbəti" style="right:14px;top:calc(50% - 23px)"><i class="fa-solid fa-chevron-right"></i></button>
+    <figure class="dialog flex flex-col items-center gap-3">
+      <img src="" alt="">
+      <figcaption data-lb-caption class="text-brand-cream text-sm"></figcaption>
+    </figure>
+  </div>
+
+  <button id="to-top" type="button" aria-label="Yuxarı qayıt"><i class="fa-solid fa-chevron-up"></i></button>
+  <div id="toast-root" aria-live="polite"></div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

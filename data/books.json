@@ -1,0 +1,6 @@
+[
+  { "id": 101, "title": "Xəmsə", "author": "Nizami Gəncəvi", "desc": "Gəncənin dahi şairinin ölməz poemalar külliyyatı.", "img": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=600&auto=format&fit=crop" },
+  { "id": 102, "title": "Əli və Nino", "author": "Qurban Səid", "desc": "Şərq və Qərb mədəniyyətinin unikal sevgisi.", "img": "https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=600&auto=format&fit=crop" },
+  { "id": 103, "title": "Balaca Şahzadə", "author": "Antuan de Sent-Ekzüperi", "desc": "Uşaqlar və böyüklər üçün dərin fəlsəfi nağıl.", "img": "https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=600&auto=format&fit=crop" },
+  { "id": 104, "title": "1984", "author": "Corc Oruell", "desc": "Məşhur antiutopik klassik roman.", "img": "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=600&auto=format&fit=crop" }
+]

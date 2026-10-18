@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Admin Panel | Littera Cafe</title>
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/tailwind.config.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-[#FAF6F0] min-h-screen">
+
+  <!-- Giriş -->
+  <div id="login" class="min-h-screen flex items-center justify-center p-4 bg-brand-dark">
+    <form id="login-form" class="bg-white rounded-3xl p-8 w-full max-w-sm shadow-2xl space-y-4">
+      <div class="text-center space-y-2">
+        <div class="w-14 h-14 mx-auto rounded-full bg-brand-dark flex items-center justify-center"><i class="fa-solid fa-book-open text-brand-accent text-2xl"></i></div>
+        <h1 class="font-serif-custom text-2xl font-bold text-brand-dark">Admin Panel</h1>
+        <p class="text-xs text-gray-500">Littera Cafe &amp; Bakery</p>
+      </div>
+      <div>
+        <label class="label" for="pw">Parol</label>
+        <input id="pw" type="password" required autocomplete="current-password" class="field" placeholder="Admin parolu" data-autofocus>
+        <p id="login-error" class="field-error"></p>
+      </div>
+      <button class="w-full bg-brand-accent hover:bg-brand-gold text-brand-dark font-bold py-3 rounded-xl transition">Daxil ol</button>
+      <a href="/" class="block text-center text-xs text-gray-500 hover:text-brand-gold">&larr; Sayta qayıt</a>
+    </form>
+  </div>
+
+  <!-- Panel -->
+  <div id="panel" class="hidden">
+    <header class="bg-brand-dark text-brand-cream">
+      <div class="container mx-auto px-4 py-4 flex items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+          <i class="fa-solid fa-book-open text-brand-accent text-xl"></i>
+          <h1 class="font-serif-custom text-xl font-bold">Littera - Admin</h1>
+        </div>
+        <div class="flex items-center gap-2 text-sm">
+          <button id="refresh" class="px-3 py-2 rounded-lg bg-brand-primary hover:bg-brand-accent hover:text-brand-dark transition"><i class="fa-solid fa-rotate"></i> Yenilə</button>
+          <button id="logout" class="px-3 py-2 rounded-lg bg-brand-primary hover:bg-red-500 transition"><i class="fa-solid fa-right-from-bracket"></i> Çıx</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 space-y-10">
+      <section>
+        <h2 class="font-serif-custom text-2xl font-bold text-brand-dark mb-4"><i class="fa-solid fa-calendar-check text-brand-gold mr-2"></i>Masa rezervləri <span id="res-count" class="text-sm text-gray-500 font-sans"></span></h2>
+        <div class="overflow-x-auto bg-white rounded-2xl shadow border border-brand-accent/20">
+          <table class="w-full text-sm text-left">
+            <thead class="bg-brand-cream/60 text-brand-dark text-xs uppercase"><tr>
+              <th class="p-3">Kod</th><th class="p-3">Ad</th><th class="p-3">Telefon</th><th class="p-3">Qonaq</th><th class="p-3">Tarix / Saat</th><th class="p-3">Qeyd</th><th class="p-3">Status</th>
+            </tr></thead>
+            <tbody id="res-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="font-serif-custom text-2xl font-bold text-brand-dark mb-4"><i class="fa-solid fa-bag-shopping text-brand-gold mr-2"></i>Sifarişlər <span id="ord-count" class="text-sm text-gray-500 font-sans"></span></h2>
+        <div class="overflow-x-auto bg-white rounded-2xl shadow border border-brand-accent/20">
+          <table class="w-full text-sm text-left">
+            <thead class="bg-brand-cream/60 text-brand-dark text-xs uppercase"><tr>
+              <th class="p-3">Kod</th><th class="p-3">Müştəri</th><th class="p-3">Növ</th><th class="p-3">Məhsullar</th><th class="p-3">Cəmi</th><th class="p-3">Tarix</th><th class="p-3">Status</th>
+            </tr></thead>
+            <tbody id="ord-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast-root" aria-live="polite"></div>
+  <script type="module" src="js/admin.js"></script>
+</body>
+</html>

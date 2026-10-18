@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4A2E2B"/><stop offset="1" stop-color="#2C1810"/></linearGradient>
+    <radialGradient id="glow" cx=".5" cy=".45" r=".6"><stop offset="0" stop-color="#D4A373" stop-opacity=".35"/><stop offset="1" stop-color="#D4A373" stop-opacity="0"/></radialGradient>
+  </defs>
+  <style>
+    .steam{fill:none;stroke:#FAEDCD;stroke-width:5;stroke-linecap:round;opacity:0;animation:steam 2.8s ease-in-out infinite}
+    .s2{animation-delay:.7s}.s3{animation-delay:1.4s}
+    @keyframes steam{0%{opacity:0;transform:translateY(10px)}40%{opacity:.8}100%{opacity:0;transform:translateY(-14px)}}
+    .bob{animation:bob 3s ease-in-out infinite}
+    @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+    .sw{transform-origin:300px 0;animation:sw 4s ease-in-out infinite}
+    @keyframes sw{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
+    @media (prefers-reduced-motion:reduce){*{animation:none!important}}
+  </style>
+  <rect width="400" height="300" fill="url(#bg)"/>
+  <rect width="400" height="300" fill="url(#glow)"/>
+  <ellipse cx="200" cy="238" rx="120" ry="16" fill="#1E120B"/>
+  <path d="M110 220h180l-30-80H140z" fill="#FAEDCD"/>
+  <path d="M120 196h160l-8-22H128z" fill="#D4A373"/>
+  <path d="M128 174h144l-10-28H138z" fill="#FEFAE0"/>
+  <path d="M138 146h124c0-14-28-26-62-26s-62 12-62 26z" fill="#C59B27"/>
+  <g class="bob"><circle cx="200" cy="108" r="14" fill="#b3261e"/><path d="M200 94c4-10 10-14 18-16" stroke="#606C38" stroke-width="4" fill="none" stroke-linecap="round"/></g>
+</svg>

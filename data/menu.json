@@ -1,0 +1,10 @@
+[
+  { "id": 1, "title": "Littera Raff Coffee", "category": "coffee", "price": 6.5, "desc": "Təbii vanil, qaymaq və espresso balansı.", "badge": "Məşhur", "img": "https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=600&auto=format&fit=crop" },
+  { "id": 2, "title": "Klassik Kapuçino", "category": "coffee", "price": 4.8, "desc": "Zəngin espresso və ipək kimi süd köpüyü.", "badge": "", "img": "https://images.unsplash.com/photo-1534778101976-62847782c213?q=80&w=600&auto=format&fit=crop" },
+  { "id": 3, "title": "Fransız Şokoladlı Kruassan", "category": "sweets", "price": 3.5, "desc": "Kərə yağı ilə hazırlanan təzə qat-qat xəmir.", "badge": "Təzə", "img": "https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=600&auto=format&fit=crop" },
+  { "id": 4, "title": "San Sebastian Çizkeyk", "category": "sweets", "price": 6.0, "desc": "Yumşaq kremli mərkəz və karamelizə olunmuş üst qat.", "badge": "Tövsiyə", "img": "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?q=80&w=600&auto=format&fit=crop" },
+  { "id": 5, "title": "Klassik İngilis Səhər Yeməyi", "category": "breakfast", "price": 9.5, "desc": "Yumurta, sosiska, lobya, göbələk və təzə tostdur.", "badge": "", "img": "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?q=80&w=600&auto=format&fit=crop" },
+  { "id": 6, "title": "Avo-Tost Poşe Yumurta ilə", "category": "breakfast", "price": 7.2, "desc": "Avokado püresi, poşe yumurta və mikrogöyərtilər.", "badge": "", "img": "https://images.unsplash.com/photo-1525351484163-7529414344d8?q=80&w=600&auto=format&fit=crop" },
+  { "id": 7, "title": "Klab Sendviç & Kartof Fri", "category": "snacks", "price": 8.0, "desc": "Toyuq əti, vetçina, yumurta və xüsusi sous.", "badge": "", "img": "https://images.unsplash.com/photo-1567234669003-dce7a7a88821?q=80&w=600&auto=format&fit=crop" },
+  { "id": 8, "title": "Mərcimək Şorbası", "category": "snacks", "price": 4.0, "desc": "Limon və krutonlar ilə təqdim olunur.", "badge": "", "img": "https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=600&auto=format&fit=crop" }
+]
