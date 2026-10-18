@@ -43,10 +43,7 @@ loadEnv(path.join(ROOT, '.env'));
 
 const PORT = Number(process.env.PORT) || 3000;
 const HOST = process.env.HOST || '127.0.0.1';
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
-if (!ADMIN_PASSWORD) {
-  throw new Error('ADMIN_PASSWORD .env faylında və ya mühit dəyişənlərində təyin edilməlidir.');
-}
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
 
 /* ---------- Xəta sinfi ---------- */
 class HttpError extends Error {
@@ -102,8 +99,8 @@ class JsonStore {
   }
 }
 
-const menuStore = new JsonStore('menu.json', []);
-const booksStore = new JsonStore('books.json', []);
+const menuStore = new JsonStore('menu.json', require('../data/menu.json'));
+const booksStore = new JsonStore('books.json', require('../data/books.json'));
 const reservationsStore = new JsonStore('reservations.json', []);
 const ordersStore = new JsonStore('orders.json', []);
 
@@ -196,6 +193,9 @@ setInterval(() => {
 /* ---------- Admin yoxlaması ---------- */
 const sha = (s) => crypto.createHash('sha256').update(String(s)).digest();
 function requireAdmin(req) {
+  if (!ADMIN_PASSWORD) {
+    throw new HttpError(503, 'Admin panel üçün ADMIN_PASSWORD mühit dəyişənini təyin edin.');
+  }
   rateLimit(req, 'admin', 60, 10 * 60 * 1000);
   const header = req.headers.authorization || '';
   const token = header.startsWith('Bearer ') ? header.slice(7) : '';

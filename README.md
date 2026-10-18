@@ -81,6 +81,6 @@ bar, yuxarı qayıt düyməsi. Sistemdə "azaldılmış hərəkət" seçilibsə 
 - Telefondan baxmaq üçün `.env`-də `HOST=0.0.0.0` yazın və kompüterin IP-si ilə açın (bu halda admin parolunu dəyişin!).
 
 ## 9. Vercel-də yerləşdirmə
-Layihəni Vercel-ə Git repository kimi qoşub **Root Directory** olaraq layihənin kök qovluğunu seçin. Kökdəki `vercel.json` statik səhifələri və `/api/*` endpoint-lərini yönləndirir. Vercel layihə parametrlərində `ADMIN_PASSWORD` mühit dəyişənini təyin edin.
+Layihəni Vercel-ə Git repository kimi qoşub **Root Directory** olaraq layihənin kök qovluğunu seçin. Kökdəki `vercel.json` statik səhifələri və `/api/*` endpoint-lərini yönləndirir. Admin panel üçün Vercel layihəsinin **Settings → Environment Variables** bölməsində `ADMIN_PASSWORD` mühit dəyişənini təyin edin. Bu dəyişən təyin edilməsə belə, ictimai menyu və kitab API-ləri işləyir; yalnız admin API-ləri deaktiv qalır.
 
 > Vercel serverless fayl sistemi daimi saxlanma üçün nəzərdə tutulmayıb. Rezervasiya və sifarişlərin deploy-lar və sorğular arasında etibarlı saxlanması üçün JSON faylları əvəzinə daimi verilənlər bazası qoşun.
